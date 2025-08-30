@@ -1,0 +1,56 @@
+<mat-toolbar color="primary" style="max-height: 48px; padding-left: 0px;">
+  <button mat-icon-button>
+    <!-- <mat-icon (click)="sidebar.toggle()">menu</mat-icon> -->
+  </button>
+  &nbsp; &nbsp;
+  <span>{{ appName }}</span>
+  <span class="example-spacer"></span>
+  <span class="example-spacer"></span>
+  <h1>{{ displayName }}</h1>
+
+  &nbsp; &nbsp;
+  <!--       <i
+        (click)="op.toggle($event)"
+        style="
+          cursor: pointer;
+          color: white;
+          font-size: 2.2rem;
+          vertical-align: bottom;
+        "
+        class="mr-2"
+        pBadge
+        value="3"
+        ><mat-icon>calendar_month</mat-icon></i
+      > -->
+  &nbsp;
+  <div (click)="profilePanel.toggle($event)" style="cursor: pointer">
+    <!-- class="mat-card-avatar"  -->
+    <img
+      style="
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        vertical-align: middle;
+      "
+      src="{{ photoURL }}"
+    />
+  </div>
+
+  <p-overlayPanel #profilePanel>
+
+  </p-overlayPanel>
+
+  <p-overlayPanel #op>
+    <ng-template pTemplate>
+      <mat-toolbar color="primary" class="mat-elevation-z8"
+        >Mis Turnos</mat-toolbar
+      >
+      <div style="text-align: center">
+        <p-calendar [inline]="true" [showWeek]="true"></p-calendar>
+      </div>
+    </ng-template>
+  </p-overlayPanel>
+  <button mat-icon-button class="example-icon" routerLink="/login">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>

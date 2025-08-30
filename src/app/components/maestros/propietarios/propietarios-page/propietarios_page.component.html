@@ -1,0 +1,166 @@
+<!-- propietarios-page.component.html -->
+<div class="page-container">
+  <!-- Loading Screen -->
+  <div *ngIf="loading" class="loading-screen">
+    <div class="loading-content">
+      <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="text-muted mt-3 mb-0 text-center px-3">Cargando propietarios...</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div *ngIf="!loading" class="main-content">
+
+    <!-- Header para vista lista -->
+    <div *ngIf="viewMode === 'list'" class="page-header">
+      <div class="header-content">
+        <!-- Mobile Header Layout -->
+        <div class="header-mobile d-block d-lg-none">
+          <div class="header-info mb-3">
+            <h1 class="page-title">Propietarios</h1>
+            <p class="page-subtitle">Gestiona los propietarios</p>
+          </div>
+          
+          <!-- Search Section Mobile -->
+          <div class="search-section mb-3">
+            <div class="input-group search-field">
+              <span class="input-group-text">
+                <i class="bi bi-search"></i>
+              </span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Buscar..."
+                [(ngModel)]="searchTerm"
+                (input)="filterPropietarios()">
+            </div>
+          </div>
+
+          <!-- Action Button Mobile -->
+          <div class="header-actions">
+            <button
+              type="button"
+              class="btn btn-primary gradient-button w-100"
+              (click)="handleNew()">
+              <i class="bi bi-plus-lg me-2"></i>
+              Nuevo Propietario
+            </button>
+          </div>
+        </div>
+
+        <!-- Desktop Header Layout -->
+        <div class="header-desktop d-none d-lg-flex">
+          <div class="header-info">
+            <h1 class="page-title">Propietarios</h1>
+            <p class="page-subtitle">Gestiona la información de los propietarios</p>
+          </div>
+
+          <div class="header-actions d-flex align-items-center gap-3">
+            <div class="search-section">
+              <div class="input-group search-field">
+                <span class="input-group-text">
+                  <i class="bi bi-search"></i>
+                </span>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Buscar propietarios..."
+                  [(ngModel)]="searchTerm"
+                  (input)="filterPropietarios()">
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="btn btn-primary gradient-button flex-shrink-0"
+              (click)="handleNew()">
+              <i class="bi bi-plus-lg me-2"></i>
+              Nuevo Propietario
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+
+      <!-- Vista Lista -->
+      <div *ngIf="viewMode === 'list'" class="list-view">
+        <div class="table-section">
+          <app-propietarios-table
+            [propietarios]="filteredPropietarios"
+            (onEdit)="handleEdit($event)"
+            (onView)="handleView($event)"
+            (onRefresh)="loadPropietarios()"
+            class="responsive-table">
+          </app-propietarios-table>
+        </div>
+      </div>
+
+      <!-- Vista Formulario -->
+      <div *ngIf="viewMode === 'form'" class="form-view">
+        <!-- Back button for mobile -->
+        <div class="mobile-back-btn d-block d-lg-none mb-3">
+          <button 
+            type="button" 
+            class="btn btn-outline-secondary btn-sm"
+            (click)="handleCancel()">
+            <i class="bi bi-arrow-left me-1"></i>
+            Volver
+          </button>
+        </div>
+        
+        <app-propietario-form
+          [propietario]="selectedPropietario"
+          (onSuccess)="handleFormSuccess()"
+          (onCancel)="handleCancel()"
+          class="responsive-form">
+        </app-propietario-form>
+      </div>
+
+      <!-- Vista Detalle -->
+      <div *ngIf="viewMode === 'detail' && selectedPropietario" class="detail-view">
+        <!-- Back button for mobile -->
+        <div class="mobile-back-btn d-block d-lg-none mb-3">
+          <button 
+            type="button" 
+            class="btn btn-outline-secondary btn-sm"
+            (click)="handleBackToList()">
+            <i class="bi bi-arrow-left me-1"></i>
+            Volver
+          </button>
+        </div>
+        
+        <app-propietario-detail
+          [propietario]="selectedPropietario"
+          (onEdit)="handleEditFromDetail()"
+          (onBack)="handleBackToList()"
+          class="responsive-detail">
+        </app-propietario-detail>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container - Responsive -->
+  <div class="toast-container position-fixed p-2 p-lg-3" 
+       style="z-index: 1060; top: 0; right: 0; left: 0; pointer-events: none;">
+    <div class="d-flex justify-content-center justify-content-lg-end">
+      <ngb-toast
+        *ngIf="showToast"
+        [class]="'toast-' + toastType + ' toast-responsive'"
+        [autohide]="true"
+        [delay]="5000"
+        (hidden)="showToast = false"
+        style="pointer-events: auto; max-width: calc(100vw - 1rem);">
+        <div class="d-flex align-items-center p-2">
+          <i *ngIf="toastType === 'success'" class="bi bi-check-circle-fill me-2 flex-shrink-0"></i>
+          <i *ngIf="toastType === 'error'" class="bi bi-exclamation-triangle-fill me-2 flex-shrink-0"></i>
+          <span class="text-truncate">{{ toastMessage }}</span>
+        </div>
+      </ngb-toast>
+    </div>
+  </div>
+</div>

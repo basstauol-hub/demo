@@ -1,0 +1,123 @@
+<div class="detail-container">
+  <!-- Header -->
+  <div class="d-flex align-items-center gap-3 mb-4">
+    <button
+      type="button"
+      class="btn btn-outline-secondary d-flex align-items-center gap-2"
+      (click)="onBack.emit()">
+      <i class="bi bi-arrow-left"></i>
+      Volver
+    </button>
+    <h1 class="fs-2 fw-bold mb-0">Detalle de la Propiedad</h1>
+  </div>
+
+  <!-- Property Detail Card -->
+  <div class="card shadow-sm">
+    <!-- Card Header -->
+    <div class="card-header bg-white border-bottom py-3">
+      <div class="d-flex justify-content-between align-items-start">
+        <div class="d-flex align-items-center gap-3">
+          <div class="property-icon">
+            <i class="bi bi-house-fill text-white"></i>
+          </div>
+          <div>
+            <h3 class="mb-1 fw-bold">{{ propiedad.direccion }}</h3>
+            <p class="text-muted mb-0">
+              {{ propiedad.ciudad }}, {{ propiedad.provincia }} - CP: {{ propiedad.codigoPostal }}
+            </p>
+          </div>
+        </div>
+        <button
+          type="button"
+          class="btn btn-primary gradient-button d-flex align-items-center gap-2"
+          (click)="onEdit.emit()">
+          <i class="bi bi-pencil"></i>
+          Editar
+        </button>
+      </div>
+    </div>
+
+    <!-- Card Content -->
+    <div class="card-body p-4">
+      <div class="row g-4">
+        <!-- Información de Ubicación -->
+        <div class="col-lg-6">
+          <div class="info-section">
+            <div class="section-header mb-3">
+              <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+              <h4 class="fw-semibold mb-0">Ubicación</h4>
+            </div>
+            <div class="section-content ms-4">
+              <div class="info-row">
+                <span class="info-label">Dirección:</span>
+                <span class="info-value">{{ propiedad.direccion }}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Ciudad:</span>
+                <span class="info-value">{{ propiedad.ciudad }}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Provincia:</span>
+                <span class="info-value">{{ propiedad.provincia }}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Código Postal:</span>
+                <span class="badge bg-light text-dark">{{ propiedad.codigoPostal }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Características -->
+        <div class="col-lg-6">
+          <div class="info-section">
+            <div class="section-header mb-3">
+              <i class="bi bi-grid-3x3-gap-fill text-primary me-2"></i>
+              <h4 class="fw-semibold mb-0">Características</h4>
+            </div>
+            <div class="section-content ms-4">
+              <div class="info-row">
+                <span class="info-label">Tipo:</span>
+                <span class="badge bg-success bg-opacity-10 text-success">
+                  {{ propiedad.idTipoPropiedad_fk?.nombre || 'Tipo ' + propiedad.idTipoPropiedad }}
+                </span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Superficie:</span>
+                <div class="d-flex align-items-center gap-1">
+                  <i class="bi bi-rulers text-muted small"></i>
+                  <span class="info-value">{{ propiedad.superficie }} m²</span>
+                </div>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Ambientes:</span>
+                <span class="badge bg-light text-dark">{{ propiedad.cantidadAmbientes }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Propietario -->
+      <div *ngIf="propiedad.idPropietario_fk" class="owner-section mt-4 pt-4 border-top">
+        <div class="section-header mb-3">
+          <i class="bi bi-person-fill text-primary me-2"></i>
+          <h4 class="fw-semibold mb-0">Propietario</h4>
+        </div>
+        <div class="owner-card ms-4">
+          <div class="owner-avatar me-3">
+            {{ propiedad.idPropietario_fk.nombre.charAt(0) }}{{ propiedad.idPropietario_fk.apellido.charAt(0) }}
+          </div>
+          <div class="owner-info">
+            <div class="owner-name fw-semibold">
+              {{ propiedad.idPropietario_fk.nombre }} {{ propiedad.idPropietario_fk.apellido }}
+            </div>
+            <div class="owner-details text-muted">
+              DNI: {{ propiedad.idPropietario_fk.dni }} • {{ propiedad.idPropietario_fk.email }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="page-container">
+  <!-- Loading Screen -->
+  <div *ngIf="loading" class="loading-screen">
+    <div class="loading-content">
+      <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="text-muted mt-3 mb-0">Cargando propiedades...</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div *ngIf="!loading" class="main-content">
+
+    <!-- Header para vista lista -->
+    <div *ngIf="viewMode === 'list'" class="page-header">
+      <div class="header-content">
+        <div class="header-info">
+          <h1 class="page-title">Propiedades</h1>
+          <p class="page-subtitle">Gestiona las propiedades de los inmuebles</p>
+        </div>
+
+        <div class="header-actions">
+          <div class="search-section">
+            <div class="input-group search-field">
+              <span class="input-group-text">
+                <i class="bi bi-search"></i>
+              </span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Buscar propiedades..."
+                [(ngModel)]="searchTerm"
+                (input)="filterPropiedades()">
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-primary gradient-button"
+            (click)="handleNew()">
+            <i class="bi bi-plus-lg me-2"></i>
+            Nueva Propiedad
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+
+      <!-- Vista Lista -->
+      <div *ngIf="viewMode === 'list'" class="list-view">
+        <div class="table-section">
+          <app-propiedades-table
+            [propiedades]="filteredPropiedades"
+            (onEdit)="handleEdit($event)"
+            (onView)="handleView($event)"
+            (onRefresh)="loadPropiedades()">
+          </app-propiedades-table>
+        </div>
+      </div>
+
+      <!-- Vista Formulario -->
+      <div *ngIf="viewMode === 'form'" class="form-view">
+        <app-propiedad-form
+          [propiedad]="selectedPropiedad"
+          (onSuccess)="handleFormSuccess()"
+          (onCancel)="handleCancel()">
+        </app-propiedad-form>
+      </div>
+
+      <!-- Vista Detalle -->
+      <div *ngIf="viewMode === 'detail' && selectedPropiedad" class="detail-view">
+        <app-propiedad-detail
+          [propiedad]="selectedPropiedad"
+          (onEdit)="handleEditFromDetail()"
+          (onBack)="handleBackToList()">
+        </app-propiedad-detail>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1060">
+    <ngb-toast
+      *ngIf="showToast"
+      [class]="'toast-' + toastType"
+      [autohide]="true"
+      [delay]="5000"
+      (hidden)="showToast = false">
+      <div class="d-flex align-items-center">
+        <i *ngIf="toastType === 'success'" class="bi bi-check-circle-fill me-2"></i>
+        <i *ngIf="toastType === 'error'" class="bi bi-exclamation-triangle-fill me-2"></i>
+        <span>{{ toastMessage }}</span>
+      </div>
+    </ngb-toast>
+  </div>
+</div>

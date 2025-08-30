@@ -1,0 +1,91 @@
+<!-- sidebar.component.html - Versión sin Material/PrimeNG -->
+<div class="sidebar-container"
+     [class.collapsed]="isCollapsed"
+     [class.expanded]="!isCollapsed">
+
+  <!-- Logo Section -->
+  <div class="logo-section">
+    <div class="logo-container" [routerLink]="'/maestros'">
+      <div class="logo-icon">
+        <i class="material-icons">business</i>
+      </div>
+      <div class="logo-info">
+        <div class="app-name">PropManager</div>
+        <div class="app-subtitle">Sistema Inmobiliario</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Menu -->
+  <div class="nav-menu">
+    <div class="nav-section-title">
+      Navegación Principal
+    </div>
+
+    <div *ngFor="let item of funciones" class="menu-item">
+      <!-- Collapsible Menu Items -->
+      <div *ngIf="this.parse(item.fun_argumentos, 'colapsable') == 'S'" class="expandable-item">
+
+        <!-- Header del menú expandible -->
+        <div class="expansion-header"
+             (click)="toggleExpansion(item.fun_id)"
+             [class.active]="item.fun_id == MODULO_ID">
+          <div class="menu-item-content">
+            <i class="menu-icon material-icons">{{ item.fun_icono }}</i>
+            <span class="menu-text">{{ item.fun_nombre }}</span>
+            <i class="expansion-indicator material-icons"
+               [class.expanded]="isItemExpanded(item.fun_id) && !isCollapsed">
+              expand_more
+            </i>
+            <div class="tooltip" *ngIf="isCollapsed">{{ item.fun_nombre }}</div>
+          </div>
+        </div>
+
+        <!-- Submenu Items -->
+        <div class="submenu-container"
+             [class.show]="isItemExpanded(item.fun_id) && !isCollapsed"
+             [class.hide]="!isItemExpanded(item.fun_id) || isCollapsed">
+          <div *ngFor="let subItem of funciones">
+            <div *ngIf="item.fun_id == subItem.fun_padre">
+              <div class="submenu-item"
+                   [routerLink]="subItem.fun_path"
+                   routerLinkActive="active-submenu">
+                <div class="submenu-item-content">
+                  <i class="submenu-icon material-icons">{{ subItem.fun_icono }}</i>
+                  <span class="submenu-text">{{ subItem.fun_nombre }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Regular Menu Items -->
+      <div *ngIf="this.parse(item.fun_argumentos, 'colapsable') != 'S' && item.fun_padre === 0"
+           class="regular-item">
+        <div class="menu-list-item"
+             [routerLink]="item.fun_path"
+             routerLinkActive="active-menu">
+          <div class="menu-item-content">
+            <i class="menu-icon material-icons">{{ item.fun_icono }}</i>
+            <span class="menu-text">{{ item.fun_nombre }}</span>
+            <div class="tooltip" *ngIf="isCollapsed">{{ item.fun_nombre }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Profile Section -->
+  <div class="user-profile">
+    <div class="user-info">
+      <div class="user-avatar">
+        <img [src]="photoURL" alt="User Avatar" />
+      </div>
+      <div class="user-details">
+        <div class="user-name">{{ displayName }}</div>
+        <div class="user-role">Administrador</div>
+      </div>
+    </div>
+  </div>
+</div>

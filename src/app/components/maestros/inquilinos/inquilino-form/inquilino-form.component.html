@@ -1,0 +1,165 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">
+      <i class="fas fa-user me-2"></i>
+      {{ isEditMode ? 'Editar Inquilino' : 'Nuevo Inquilino' }}
+    </h5>
+  </div>
+  
+  <div class="card-body">
+    <form [formGroup]="inquilinoForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+         Nombre 
+        <div class="col-md-6 mb-3">
+          <label for="nombre" class="form-label">
+            Nombre <span class="text-danger">*</span>
+          </label>
+          <input
+            type="text"
+            id="nombre"
+            class="form-control"
+            [class.is-invalid]="isFieldInvalid('nombre')"
+            formControlName="nombre"
+            placeholder="Ingrese el nombre"
+          />
+          <div class="invalid-feedback" *ngIf="isFieldInvalid('nombre')">
+            {{ getFieldError('nombre') }}
+          </div>
+        </div>
+
+         Apellido 
+        <div class="col-md-6 mb-3">
+          <label for="apellido" class="form-label">
+            Apellido <span class="text-danger">*</span>
+          </label>
+          <input
+            type="text"
+            id="apellido"
+            class="form-control"
+            [class.is-invalid]="isFieldInvalid('apellido')"
+            formControlName="apellido"
+            placeholder="Ingrese el apellido"
+          />
+          <div class="invalid-feedback" *ngIf="isFieldInvalid('apellido')">
+            {{ getFieldError('apellido') }}
+          </div>
+        </div>
+
+         DNI 
+        <div class="col-md-6 mb-3">
+          <label for="dni" class="form-label">
+            DNI <span class="text-danger">*</span>
+          </label>
+          <input
+            type="text"
+            id="dni"
+            class="form-control"
+            [class.is-invalid]="isFieldInvalid('dni')"
+            formControlName="dni"
+            placeholder="12345678"
+            maxlength="8"
+          />
+          <div class="invalid-feedback" *ngIf="isFieldInvalid('dni')">
+            {{ getFieldError('dni') }}
+          </div>
+        </div>
+
+         CUIT/CUIL 
+        <div class="col-md-6 mb-3">
+          <label for="cuit_cuil" class="form-label">
+            CUIT/CUIL <span class="text-danger">*</span>
+          </label>
+          <input
+            type="text"
+            id="cuit_cuil"
+            class="form-control"
+            [class.is-invalid]="isFieldInvalid('cuit_cuil')"
+            formControlName="cuit_cuil"
+            placeholder="20-12345678-9"
+            maxlength="13"
+          />
+          <div class="invalid-feedback" *ngIf="isFieldInvalid('cuit_cuil')">
+            {{ getFieldError('cuit_cuil') }}
+          </div>
+        </div>
+
+         Teléfono 
+        <div class="col-md-6 mb-3">
+          <label for="telefono" class="form-label">
+            Teléfono <span class="text-danger">*</span>
+          </label>
+          <input
+            type="tel"
+            id="telefono"
+            class="form-control"
+            [class.is-invalid]="isFieldInvalid('telefono')"
+            formControlName="telefono"
+            placeholder="+54 11 1234-5678"
+          />
+          <div class="invalid-feedback" *ngIf="isFieldInvalid('telefono')">
+            {{ getFieldError('telefono') }}
+          </div>
+        </div>
+
+         Email 
+        <div class="col-md-6 mb-3">
+          <label for="email" class="form-label">
+            Email <span class="text-danger">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            [class.is-invalid]="isFieldInvalid('email')"
+            formControlName="email"
+            placeholder="ejemplo@correo.com"
+          />
+          <div class="invalid-feedback" *ngIf="isFieldInvalid('email')">
+            {{ getFieldError('email') }}
+          </div>
+        </div>
+
+         Dirección 
+        <div class="col-12 mb-3">
+          <label for="direccion" class="form-label">
+            Dirección <span class="text-danger">*</span>
+          </label>
+          <input
+            type="text"
+            id="direccion"
+            class="form-control"
+            [class.is-invalid]="isFieldInvalid('direccion')"
+            formControlName="direccion"
+            placeholder="Calle, número, ciudad, provincia"
+          />
+          <div class="invalid-feedback" *ngIf="isFieldInvalid('direccion')">
+            {{ getFieldError('direccion') }}
+          </div>
+        </div>
+      </div>
+
+       Buttons 
+      <div class="d-flex justify-content-end gap-2 mt-4">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="onCancelClick()"
+          [disabled]="saving"
+        >
+          <i class="fas fa-times me-1"></i>
+          Cancelar
+        </button>
+        
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="saving || inquilinoForm.invalid"
+        >
+          <span *ngIf="saving" class="spinner-border spinner-border-sm me-2" role="status"></span>
+          <i *ngIf="!saving" class="fas fa-save me-1"></i>
+          {{ saving ? 'Guardando...' : (isEditMode ? 'Actualizar' : 'Crear') }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

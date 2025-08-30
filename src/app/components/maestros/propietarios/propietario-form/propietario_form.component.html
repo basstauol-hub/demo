@@ -1,0 +1,192 @@
+<!-- propietario-form.component.html -->
+<div class="form-container">
+  <div class="form-card">
+    <!-- Header -->
+    <div class="form-header">
+      <div class="d-flex align-items-center gap-3">
+        <div class="form-icon">
+          <i class="bi bi-person-fill text-white"></i>
+        </div>
+        <div>
+          <h2 class="form-title mb-1">{{ isEditMode ? 'Editar Propietario' : 'Nuevo Propietario' }}</h2>
+          <p class="form-subtitle mb-0">{{ isEditMode ? 'Modifica los datos del propietario' : 'Completa los datos del nuevo propietario' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="propietarioForm" (ngSubmit)="onSubmit()" class="form-content">
+
+      <!-- Información Personal Section -->
+      <div class="form-section">
+        <h3 class="section-title">Información Personal</h3>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label required" for="nombre">Nombre</label>
+              <input
+                type="text"
+                id="nombre"
+                class="form-control"
+                formControlName="nombre"
+                placeholder="Ingresa el nombre"
+                [class.is-invalid]="isFieldInvalid('nombre')">
+              <div *ngIf="isFieldInvalid('nombre')" class="invalid-feedback">
+                El nombre es requerido
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label required" for="apellido">Apellido</label>
+              <input
+                type="text"
+                id="apellido"
+                class="form-control"
+                formControlName="apellido"
+                placeholder="Ingresa el apellido"
+                [class.is-invalid]="isFieldInvalid('apellido')">
+              <div *ngIf="isFieldInvalid('apellido')" class="invalid-feedback">
+                El apellido es requerido
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Documentos Section -->
+      <div class="form-section">
+        <h3 class="section-title">Documentos</h3>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label required" for="dni">DNI</label>
+              <input
+                type="text"
+                id="dni"
+                class="form-control"
+                formControlName="dni"
+                placeholder="12345678"
+                maxlength="8"
+                [class.is-invalid]="isFieldInvalid('dni')">
+              <div *ngIf="isFieldInvalid('dni')" class="invalid-feedback">
+                <div *ngIf="propietarioForm.get('dni')?.hasError('required')">
+                  El DNI es requerido
+                </div>
+                <div *ngIf="propietarioForm.get('dni')?.hasError('pattern')">
+                  El DNI debe tener 8 dígitos numéricos
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label" for="cuitCuil">CUIT/CUIL</label>
+              <input
+                type="text"
+                id="cuitCuil"
+                class="form-control"
+                formControlName="cuit_cuil"
+                placeholder="20-12345678-9"
+                maxlength="13"
+                [class.is-invalid]="isFieldInvalid('cuit_cuil')">
+              <div *ngIf="isFieldInvalid('cuit_cuil')" class="invalid-feedback">
+                El formato debe ser: XX-XXXXXXXX-X
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Información de Contacto Section -->
+      <div class="form-section">
+        <h3 class="section-title">Información de Contacto</h3>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label required" for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                formControlName="email"
+                placeholder="correo@ejemplo.com"
+                [class.is-invalid]="isFieldInvalid('email')">
+              <div *ngIf="isFieldInvalid('email')" class="invalid-feedback">
+                <div *ngIf="propietarioForm.get('email')?.hasError('required')">
+                  El email es requerido
+                </div>
+                <div *ngIf="propietarioForm.get('email')?.hasError('email')">
+                  Ingresa un email válido
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label" for="telefono">Teléfono</label>
+              <input
+                type="tel"
+                id="telefono"
+                class="form-control"
+                formControlName="telefono"
+                placeholder="+54 11 1234-5678"
+                [class.is-invalid]="isFieldInvalid('telefono')">
+              <div *ngIf="isFieldInvalid('telefono')" class="invalid-feedback">
+                Ingresa un teléfono válido
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dirección Section -->
+      <div class="form-section">
+        <h3 class="section-title">Dirección</h3>
+
+        <div class="form-group">
+          <label class="form-label" for="direccion">Dirección Completa</label>
+          <textarea
+            id="direccion"
+            class="form-control"
+            formControlName="direccion"
+            rows="3"
+            placeholder="Calle, número, piso, departamento, ciudad, provincia..."
+            [class.is-invalid]="isFieldInvalid('direccion')"></textarea>
+          <div class="form-text">
+            Incluye la información más completa posible: calle, número, piso, departamento, ciudad, provincia.
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="btn btn-primary gradient-button"
+          [disabled]="propietarioForm.invalid || saving">
+          <div *ngIf="saving" class="spinner-border spinner-border-sm me-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <i *ngIf="!saving" class="bi bi-check-lg me-2"></i>
+          {{ saving ? 'Guardando...' : (isEditMode ? 'Actualizar' : 'Crear Propietario') }}
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="onCancelClick()"
+          [disabled]="saving">
+          <i class="bi bi-x-lg me-2"></i>
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

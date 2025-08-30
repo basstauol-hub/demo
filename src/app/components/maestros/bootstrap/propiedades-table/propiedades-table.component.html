@@ -1,0 +1,128 @@
+<div class="table-container">
+  <!-- Empty State -->
+  <div *ngIf="propiedades.length === 0" class="empty-state text-center py-5">
+    <i class="bi bi-buildings fs-1 text-muted mb-3"></i>
+    <p class="text-muted fs-5 mb-0">No hay propiedades registradas</p>
+  </div>
+
+  <!-- Table -->
+  <div *ngIf="propiedades.length > 0" class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-header">
+        <tr>
+          <th scope="col" class="table-th">Propiedad</th>
+          <th scope="col" class="table-th">Ubicación</th>
+          <th scope="col" class="table-th">Características</th>
+          <th scope="col" class="table-th">Propietario</th>
+          <th scope="col" class="table-th text-end">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let propiedad of propiedades" class="table-row">
+          <!-- Propiedad -->
+          <td class="py-3">
+            <div class="d-flex align-items-center">
+              <div class="property-icon me-3">
+                <i class="bi bi-house-fill text-white"></i>
+              </div>
+              <div>
+                <div class="property-address fw-medium text-dark">
+                  {{ propiedad.direccion }}
+                </div>
+                <small class="property-id text-muted">ID: {{ propiedad.id }}</small>
+              </div>
+            </div>
+          </td>
+
+          <!-- Ubicación -->
+          <td class="py-3">
+            <div class="location-info">
+              <div class="d-flex align-items-center mb-1">
+                <i class="bi bi-geo-alt-fill location-icon me-1"></i>
+                <span class="location-city">{{ propiedad.ciudad }}</span>
+              </div>
+              <div class="location-province text-muted mb-2">{{ propiedad.provincia }}</div>
+              <span class="postal-code-badge">CP: {{ propiedad.codigoPostal }}</span>
+            </div>
+          </td>
+
+          <!-- Características -->
+          <td class="py-3">
+            <div class="features-info">
+              <span class="property-type-badge mb-2 d-block">
+                {{ propiedad.idTipoPropiedad_fk?.nombre || 'Local Comercial' }}
+              </span>
+              <div class="features-details d-flex gap-3">
+                <div class="feature-item d-flex align-items-center">
+                  <i class="bi bi-rulers feature-icon me-1"></i>
+                  <span class="feature-text">{{ propiedad.superficie }} m²</span>
+                </div>
+                <div class="feature-item d-flex align-items-center">
+                  <i class="bi bi-grid-3x3-gap-fill feature-icon me-1"></i>
+                  <span class="feature-text">{{ propiedad.cantidadAmbientes }} amb</span>
+                </div>
+              </div>
+            </div>
+          </td>
+
+          <!-- Propietario -->
+          <td class="py-3">
+            <div *ngIf="propiedad.idPropietario_fk; else noOwner"
+                 class="d-flex align-items-center">
+              <div class="owner-avatar me-2">
+                {{ propiedad.idPropietario_fk.nombre.charAt(0) }}{{ propiedad.idPropietario_fk.apellido.charAt(0) }}
+              </div>
+              <div class="owner-info">
+                <div class="owner-name fw-medium text-dark">
+                  {{ propiedad.idPropietario_fk.nombre }} {{ propiedad.idPropietario_fk.apellido }}
+                </div>
+                <small class="owner-dni text-muted">DNI: {{ propiedad.idPropietario_fk.dni }}</small>
+              </div>
+            </div>
+            <ng-template #noOwner>
+              <div class="d-flex align-items-center text-muted">
+                <i class="bi bi-person-x me-2"></i>
+                <small>Sin propietario</small>
+              </div>
+            </ng-template>
+          </td>
+
+          <!-- Acciones -->
+          <td class="py-3">
+            <div class="d-flex justify-content-end gap-1">
+              <button
+                type="button"
+                class="btn btn-action btn-view"
+                (click)="onView.emit(propiedad)"
+                [ngbTooltip]="'Ver detalle'">
+                <i class="bi bi-eye"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-action btn-edit"
+                (click)="onEdit.emit(propiedad)"
+                [ngbTooltip]="'Editar'">
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-action btn-delete"
+                (click)="confirmDelete(propiedad)"
+                [disabled]="deletingId === propiedad.id"
+                [ngbTooltip]="'Eliminar'">
+                <div *ngIf="deletingId === propiedad.id; else deleteIcon"
+                     class="spinner-border spinner-border-sm"
+                     role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <ng-template #deleteIcon>
+                  <i class="bi bi-trash"></i>
+                </ng-template>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

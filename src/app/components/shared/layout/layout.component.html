@@ -1,0 +1,68 @@
+<!-- layout.component.html - Versión actualizada sin Material/PrimeNG -->
+<div class="layout-container">
+  <!-- Sidebar -->
+  <app-sidebar #sidebar [MODULO_ID]="MODULO_ID"></app-sidebar>
+
+  <!-- Main Content Area -->
+  <div class="main-content" [class.sidebar-collapsed]="sidebar.isCollapsed">
+    <!-- Toolbar -->
+    <div class="main-toolbar">
+      <!-- Menu Toggle Button -->
+      <button class="menu-toggle" (click)="sidebar.toggleSidebar()">
+        <i class="material-icons">menu</i>
+      </button>
+
+      <span class="app-title">{{ appName }}</span>
+      <span class="example-spacer"></span>
+      <h1 class="page-title">{{ displayName }}</h1>
+
+      <!-- Profile Section -->
+      <div class="profile-section">
+        <div class="profile-btn" (click)="toggleProfilePanel($event)">
+          <img class="profile-avatar" [src]="photoURL" alt="Profile" />
+        </div>
+
+        <!-- Profile Panel -->
+<!--         <div class="profile-panel" [class.show]="showProfilePanel" #profilePanel>
+          <div class="profile-header">
+            <img [src]="photoURL" alt="Profile" />
+            <div>
+              <h4>{{ displayName }}</h4>
+              <p>Administrador</p>
+            </div>
+          </div>
+<!--           <div class="profile-actions">
+            <button (click)="editProfile()">
+              <i class="material-icons">person</i>
+              Editar Perfil
+            </button>
+            <button (click)="changePassword()">
+              <i class="material-icons">lock</i>
+              Cambiar Contraseña
+            </button>
+            <button (click)="logout()">
+              <i class="material-icons">logout</i>
+              Cerrar Sesión
+            </button>
+          </div> -- >
+        </div> -->
+      </div>
+
+
+      <!-- Logout Button -->
+      <button class="logout-btn" (click)="logout()">
+        <i class="material-icons">logout</i>
+      </button>
+    </div>
+
+    <!-- Router Outlet -->
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+
+    <!-- Scroll to top button -->
+<!--     <button class="scroll-top" (click)="scrollToTop()" [class.show]="showScrollTop">
+      <i class="material-icons">keyboard_arrow_up</i>
+    </button> -->
+  </div>
+</div>

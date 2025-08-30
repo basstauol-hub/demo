@@ -1,0 +1,441 @@
+/* sidebar.component.css - Versión sin Material/PrimeNG */
+.sidebar-container {
+  background: #f8f9fa;
+  border-right: 1px solid #e9ecef;
+  height: 100vh;
+  width: 260px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-container.collapsed {
+  width: 70px;
+}
+
+/* Logo Section */
+.logo-section {
+  padding: 16px;
+  background: white;
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  position: relative;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.logo-icon {
+  background: #6c5ce7;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-right: 12px;
+  min-width: 40px;
+}
+
+.logo-icon i {
+  font-size: 20px;
+}
+
+.collapsed .logo-icon {
+  margin-right: 0;
+}
+
+.app-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d3436;
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.collapsed .app-name {
+  opacity: 0;
+  width: 0;
+}
+
+.app-subtitle {
+  font-size: 12px;
+  color: #636e72;
+  margin-top: 2px;
+}
+
+.collapsed .app-subtitle {
+  display: none;
+}
+
+/* Navigation Menu */
+.nav-menu {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: visible;
+  padding: 20px 0;
+}
+
+.nav-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nav-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.nav-menu::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 3px;
+}
+
+.nav-section-title {
+  color: #636e72;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0 20px 12px 20px;
+  margin-bottom: 8px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.collapsed .nav-section-title {
+  opacity: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+/* Menu Items */
+.menu-item {
+  margin: 2px 0;
+  position: relative;
+}
+
+.menu-item-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: #2d3436;
+  transition: all 0.3s ease;
+  position: relative;
+  height: 44px;
+  padding: 0;
+}
+
+.menu-icon {
+  font-size: 20px;
+  min-width: 24px;
+  margin-right: 16px;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #636e72;
+  transition: all 0.3s ease;
+}
+
+.collapsed .menu-icon {
+  margin-left: 23px;
+  margin-right: 0;
+  font-size: 24px;
+}
+
+.menu-text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #2d3436;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  flex: 1;
+}
+
+.collapsed .menu-text {
+  opacity: 0;
+  width: 0;
+}
+
+/* Regular Menu Items */
+.menu-list-item {
+  height: 44px;
+  cursor: pointer;
+  border-radius: 0;
+  margin: 0;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.menu-list-item:hover {
+  background-color: #f1f3f4;
+}
+
+.menu-list-item:hover .menu-icon {
+  color: #6c5ce7;
+}
+
+.menu-list-item.active-menu {
+  background-color: #e8f4fd;
+  border-right: 3px solid #0ea5e9;
+}
+
+.menu-list-item.active-menu .menu-icon {
+  color: #0ea5e9;
+}
+
+.menu-list-item.active-menu .menu-text {
+  color: #0ea5e9;
+  font-weight: 600;
+}
+
+/* Expansion Panel Styles */
+.expandable-item {
+  background: transparent;
+}
+
+.expansion-header {
+  background: transparent;
+  padding: 0;
+  height: 44px;
+  min-height: 44px;
+  transition: all 0.3s ease;
+  border-radius: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.expansion-header:hover {
+  background-color: #f1f3f4;
+}
+
+.expansion-header:hover .menu-icon {
+  color: #6c5ce7;
+}
+
+.expansion-header.active {
+  background-color: #e8f4fd;
+}
+
+.expansion-indicator {
+  margin-left: auto;
+  margin-right: 16px;
+  font-size: 20px;
+  color: #636e72;
+  transition: transform 0.3s ease;
+}
+
+.expansion-indicator.expanded {
+  transform: rotate(180deg);
+}
+
+.collapsed .expansion-indicator {
+  display: none;
+}
+
+/* Submenu Container */
+.submenu-container {
+  background-color: #fafbfc;
+  border-left: 2px solid #e9ecef;
+  margin-left: 15px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.submenu-container.show {
+  max-height: 500px; /* Ajustar según sea necesario */
+}
+
+.submenu-container.hide {
+  max-height: 0;
+}
+
+.collapsed .submenu-container {
+  display: none;
+}
+
+/* Submenu Items */
+.submenu-item {
+  height: 36px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.submenu-item:hover {
+  background-color: #f1f3f4;
+}
+
+.submenu-item.active-submenu {
+  background-color: #e8f4fd;
+  border-right: 3px solid #0ea5e9;
+}
+
+.submenu-item-content {
+  display: flex;
+  align-items: center;
+  color: #636e72;
+}
+
+.submenu-item.active-submenu .submenu-item-content {
+  color: #0ea5e9;
+}
+
+.submenu-icon {
+  font-size: 18px;
+  min-width: 20px;
+  margin-right: 12px;
+}
+
+.submenu-text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* User Profile Section */
+.user-profile {
+  padding: 16px 20px;
+  border-top: 1px solid #e9ecef;
+  background: white;
+  margin-top: auto;
+}
+
+.collapsed .user-profile {
+  padding: 16px 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  margin-right: 12px;
+}
+
+.collapsed .user-avatar {
+  margin-right: 0;
+}
+
+.user-avatar img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e9ecef;
+}
+
+.user-details {
+  flex: 1;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.collapsed .user-details {
+  opacity: 0;
+  width: 0;
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2d3436;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role {
+  font-size: 11px;
+  color: #636e72;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tooltip for collapsed state */
+.tooltip {
+  position: absolute;
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #2d3436;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1001;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 4px solid transparent;
+  border-right-color: #2d3436;
+}
+
+.menu-item:hover .tooltip,
+.submenu-item:hover .tooltip {
+  opacity: 1;
+}
+
+.collapsed .menu-item:hover .tooltip,
+.collapsed .submenu-item:hover .tooltip {
+  opacity: 1;
+}
+
+.expanded .tooltip {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar-container {
+    width: 70px;
+  }
+}

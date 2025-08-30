@@ -1,0 +1,75 @@
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead class="table-light">
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">DNI</th>
+        <th scope="col">CUIT/CUIL</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Email</th>
+        <th scope="col" class="text-center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inquilino of inquilinos; ">
+        <td>{{ inquilino.nombre }}</td>
+        <td>{{ inquilino.apellido }}</td>
+        <td>{{ inquilino.dni }}</td>
+        <td>{{ inquilino.cuit_cuil }}</td>
+        <td>
+          <a [href]="'tel:' + inquilino.telefono" class="text-decoration-none">
+            {{ inquilino.telefono }}
+          </a>
+        </td>
+        <td>
+          <a [href]="'mailto:' + inquilino.email" class="text-decoration-none">
+            {{ inquilino.email }}
+          </a>
+        </td>
+        <td class="text-center">
+          <div class="btn-group btn-group-sm" role="group">
+            <button
+              type="button"
+              class="btn btn-outline-info"
+              (click)="onView.emit(inquilino)"
+              ngbTooltip="Ver detalles"
+              placement="top"
+            >
+              <i class="fas fa-eye"></i>
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              (click)="onEdit.emit(inquilino)"
+              ngbTooltip="Editar"
+              placement="top"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              (click)="confirmDelete(inquilino)"
+              [disabled]="deletingId === inquilino.id"
+              ngbTooltip="Eliminar"
+              placement="top"
+            >
+              <span *ngIf="deletingId === inquilino.id" class="spinner-border spinner-border-sm" role="status"></span>
+              <i *ngIf="deletingId !== inquilino.id" class="fas fa-trash"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+
+      <tr *ngIf="inquilinos.length === 0">
+        <td colspan="7" class="text-center text-muted py-4">
+          <i class="fas fa-users fa-2x mb-2 d-block"></i>
+          No hay inquilinos registrados
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,574 @@
+<div style="width: 100%; padding: 20px; white-space: nowrap">
+  <table style="width: 100%">
+    <tr>
+      <td style="width: 25%">
+        <mat-card
+          class="mat-elevation-z4 fondo-card-03"
+          (click)="link('periodo1')"
+          style="cursor: pointer"
+        >
+          <mat-card-title>
+            <table width="100%" [cellPadding]="0" [cellSpacing]="0">
+              <tr>
+                <td
+                  style="
+                    vertical-align: middle;
+                    font-size: 32px;
+                    font-weight: bolder;
+                    color: white;
+                  "
+                >
+                  {{parametro1.prt_valor | periodoPipe}}
+                </td>
+                <td
+                  style="
+                    width: 100%;
+                    text-align: right;
+                    vertical-align: bottom;
+                    color: white;
+                  "
+                >
+                  <span class="material-icons icono-card-03" style="font-size: 48px">
+                    calendar_month
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </mat-card-title>
+          <mat-card-subtitle style="color: white"
+            >Período Desde</mat-card-subtitle
+          >
+        </mat-card>
+      </td>
+      <td style="width: 25%">
+        <mat-card
+          class="mat-elevation-z4 fondo-card-02"
+          (click)="link('periodo2')"
+          style="cursor: pointer"
+        >
+          <mat-card-title>
+            <table width="100%" [cellPadding]="0" [cellSpacing]="0">
+              <tr>
+                <td
+                  style="
+                    vertical-align: middle;
+                    font-size: 32px;
+                    font-weight: bolder;
+                    color: white;
+                  "
+                >
+                {{parametro2.prt_valor | periodoPipe}}
+                </td>
+                <td
+                  style="
+                    width: 100%;
+                    text-align: right;
+                    vertical-align: bottom;
+                    color: white;
+                  "
+                >
+                  <span class="material-icons icono-card-02" style="font-size: 48px">
+                    calendar_month
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </mat-card-title>
+          <mat-card-subtitle style="color: white"
+            >Período Hasta</mat-card-subtitle
+          >
+        </mat-card>
+      </td>
+      <td style="width: 25%">
+        <mat-card
+          class="mat-elevation-z4 fondo-card-04"
+          (click)="link('ventas')"
+          style="cursor: pointer"
+        >
+          <mat-card-title>
+            <table width="100%" [cellPadding]="0" [cellSpacing]="0">
+              <tr>
+                <td
+                  style="
+                    vertical-align: middle;
+                    font-size: 32px;
+                    font-weight: bolder;
+                    color: white;
+                  "
+                >
+                {{parametro3.prt_valor}}
+                </td>
+                <td
+                  style="
+                    width: 100%;
+                    text-align: right;
+                    vertical-align: bottom;
+                    color: white;
+                  "
+                >
+                  <span class="material-icons icono-card-04" style="font-size: 48px">
+                    calendar_month
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </mat-card-title>
+          <mat-card-subtitle style="color: white"
+            >Mes inicio</mat-card-subtitle
+          >
+        </mat-card>
+      </td>
+      <td style="width: 25%">
+        <mat-card
+          class="mat-elevation-z4 fondo-card-05"
+          (click)="link('ventas')"
+          style="cursor: pointer"
+        >
+          <mat-card-title>
+            <table width="100%" [cellPadding]="0" [cellSpacing]="0">
+              <tr>
+                <td
+                  style="
+                    vertical-align: middle;
+                    font-size: 32px;
+                    font-weight: bolder;
+                    color: white;
+                  "
+                >
+                {{parametro4.prt_valor}}
+                </td>
+                <td
+                  style="
+                    width: 100%;
+                    text-align: right;
+                    vertical-align: bottom;
+                    color: white;
+                  "
+                >
+                  <span class="material-icons icono-card-05" style="font-size: 48px">
+                    calendar_month
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </mat-card-title>
+          <mat-card-subtitle style="color: white;"
+            >Mes fin</mat-card-subtitle
+          >
+        </mat-card>
+      </td>
+    </tr>
+  </table>
+  <br />
+  <table>
+    <tr>
+      <td style="width: 10%;vertical-align: top;"></td>
+      <td style="width: 20%;vertical-align: top; padding-left: 10px;">
+        <mat-card class="mat-elevation-z4" style="cursor: pointer">
+          <h2>Indicador 5</h2>
+          <p-chart
+            style="height: 250px;"
+            type="line"
+            width="200"
+            height="200"
+            [data]="multiAxisData"
+            [options]="multiAxisOptions"
+          ></p-chart>
+        </mat-card>
+      </td>
+      <td style="width: 20%;vertical-align: top; padding-left: 10px;">
+        <mat-card class="mat-elevation-z4" style="cursor: pointer">
+          <h2>Indicador 6</h2>
+          <p-chart
+            type="bar"
+            width="200"
+            height="200"
+            [data]="multiAxisData"
+            [options]="multiAxisOptions"
+          ></p-chart>
+        </mat-card>
+      </td>
+      <td style="width: 10%;vertical-align: top;"></td>
+      <!--         <mat-card class="mat-elevation-z4" style="cursor: pointer">
+          <table style="width: 100%">
+            <tr>
+              <td style="width: 30%; height: 200px">
+
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%">
+                <p-chart
+                  type="bar"
+                  [data]="multiAxisDataBar"
+                  [options]="multiAxisOptions"
+                ></p-chart>
+              </td>
+              <td style="width: 50%"></td>
+            </tr>
+          </table>
+        </mat-card>
+      </td>-->
+    </tr>
+  </table>
+</div>
+<!-- <div style="width: 80%; padding: 20px; white-space: nowrap">
+  <mat-card class="mat-elevation-z8" style="background: #dedede">
+    <mat-card-title style="font-weight: bolder">Dashboard</mat-card-title>
+    <mat-card-content style="background: #dedede">
+      <table [cellPadding]="10" style="width: 100%">
+        <tr>
+          <td style="width: 33%">
+            <mat-card
+              class="mat-elevation-z4 fondo-card-5"
+              (click)="link('ventas')"
+              style="cursor: pointer"
+            >
+              <mat-card-title>
+                <table width="100%" [cellPadding]="0" [cellSpacing]="0">
+                  <tr>
+                    <td
+                      style="
+                        vertical-align: middle;
+                        font-size: 32px;
+                        font-weight: bolder;
+                        color: white;
+                      "
+                    >
+                      {{ totalDiario | currency }}
+                    </td>
+                    <td
+                      style="
+                        width: 100%;
+                        text-align: right;
+                        vertical-align: bottom;
+                        color: white;
+                      "
+                    >
+                      <span class="material-icons" style="font-size: 48px">
+                        point_of_sale
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+              </mat-card-title>
+              <mat-card-subtitle style="color: white"
+                >Recaudación diaria</mat-card-subtitle
+              >
+            </mat-card>
+          </td>
+          <td style="width: 33%">
+            <mat-card
+              class="mat-elevation-z4 fondo-card-6"
+              (click)="link('ventas')"
+              style="cursor: pointer"
+            >
+              <mat-card-title>
+                <table width="100%" [cellPadding]="0" [cellSpacing]="0">
+                  <tr>
+                    <td
+                      style="
+                        vertical-align: middle;
+                        font-size: 32px;
+                        font-weight: bolder;
+                        color: white;
+                      "
+                    >
+                      {{ mercadoPagoDiario | currency }}
+                    </td>
+                    <td
+                      style="
+                        width: 100%;
+                        text-align: right;
+                        vertical-align: bottom;
+                        color: white;
+                      "
+                    >
+                      <span class="material-icons" style="font-size: 48px">
+                        credit_card
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+              </mat-card-title>
+              <mat-card-subtitle style="color: white"
+                >Mercado Pago</mat-card-subtitle
+              >
+            </mat-card>
+          </td>
+          <td style="width: 33%; vertical-align: top">
+            <mat-card
+              class="mat-elevation-z4 fondo-card-7"
+              (click)="link('ventas')"
+              style="cursor: pointer"
+            >
+              <mat-card-title>
+                <table width="100%" [cellPadding]="0" [cellSpacing]="0">
+                  <tr>
+                    <td
+                      style="
+                        vertical-align: middle;
+                        font-size: 32px;
+                        font-weight: bolder;
+                        color: white;
+                        white-space: nowrap;
+                      "
+                    >
+                      {{ cantVentasDiario }}
+                    </td>
+                    <td
+                      style="
+                        width: 100%;
+                        text-align: right;
+                        vertical-align: bottom;
+                        color: white;
+                      "
+                    >
+                      <span class="material-icons" style="font-size: 48px">
+                        shopping_cart
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+              </mat-card-title>
+              <mat-card-subtitle style="color: white"
+                >Cantidad de Ventas</mat-card-subtitle
+              >
+            </mat-card>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 33%">
+            <mat-card
+              class="mat-elevation-z4 fondo-card-8"
+              (click)="link('vencimientos')"
+              style="cursor: pointer"
+            >
+              <mat-card-title>
+                <table width="100%" [cellPadding]="0" [cellSpacing]="0">
+                  <tr>
+                    <td
+                      style="
+                        vertical-align: middle;
+                        font-size: 32px;
+                        font-weight: bolder;
+                        color: #961276;
+                      "
+                    >
+                      {{ cantVencimientos }}
+                    </td>
+                    <td
+                      style="
+                        width: 100%;
+                        text-align: right;
+                        vertical-align: bottom;
+                        color: #961276;
+                      "
+                    >
+                      <span class="material-icons" style="font-size: 48px">
+                        event_busy
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+              </mat-card-title>
+              <mat-card-subtitle style="color: #961276"
+                >Vencimientos próx. 60 días</mat-card-subtitle
+              >
+            </mat-card>
+          </td>
+          <td>
+            <mat-card
+              class="mat-elevation-z4 fondo-card-1"
+              (click)="link('fechas')"
+              style="cursor: pointer"
+            >
+              <mat-card-title>
+                <table width="100%" [cellPadding]="0" [cellSpacing]="0">
+                  <tr>
+                    <div *ngIf="cantDiasFechaEspecial === '0'">
+                      <td
+                        style="
+                          vertical-align: middle;
+                          font-size: 32px;
+                          font-weight: bolder;
+                          color: white;
+                        "
+                      >
+                        Hoy!!!
+                      </td>
+                    </div>
+                    <div *ngIf="cantDiasFechaEspecial === '1'">
+                      <td
+                        style="
+                          vertical-align: middle;
+                          font-size: 32px;
+                          font-weight: bolder;
+                          color: white;
+                        "
+                      >
+                        Mañana!!!
+                      </td>
+                    </div>
+                    <div *ngIf="cantDiasFechaEspecial !== '1'">
+                      <td
+                        style="
+                          vertical-align: middle;
+                          font-size: 32px;
+                          font-weight: bolder;
+                          color: white;
+                        "
+                      >
+                        {{ cantDiasFechaEspecial }} Días
+                      </td>
+                    </div>
+                    <td
+                      style="
+                        width: 100%;
+                        text-align: right;
+                        vertical-align: bottom;
+                        color: white;
+                      "
+                    >
+                      <span class="material-icons" style="font-size: 48px">
+                        card_giftcard
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+              </mat-card-title>
+              <mat-card-subtitle style="color: white">{{
+                nombreFechaEspecial
+              }}</mat-card-subtitle>
+            </mat-card>
+          </td>
+          <td style="width: 33%; vertical-align: middle">
+            <mat-card
+              class="mat-elevation-z4 fondo-card-2"
+              (click)="link('precios')"
+              style="cursor: pointer"
+            >
+              <mat-card-title>
+                <table width="100%" [cellPadding]="0" [cellSpacing]="0">
+                  <tr>
+                    <td
+                      style="
+                        vertical-align: middle;
+                        font-size: 32px;
+                        font-weight: bolder;
+                        color: #961276;
+                        white-space: nowrap;
+                      "
+                    >
+                      {{ cantActualizaciones }} ({{ maxActualizaciones }})
+                    </td>
+                    <td
+                      style="
+                        width: 100%;
+                        text-align: right;
+                        vertical-align: bottom;
+                        color: #961276;
+                      "
+                    >
+                      <span class="material-icons" style="font-size: 48px">
+                        sell
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+              </mat-card-title>
+              <mat-card-subtitle style="color: #961276"
+                >Productos desactualizados</mat-card-subtitle
+              >
+            </mat-card>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="width: 33%">
+            <mat-card
+              class="mat-elevation-z4 fondo-card-5"
+              (click)="link('ventas')"
+              style="cursor: pointer"
+            >
+              <mat-card-title>
+                <table width="100%" [cellPadding]="0" [cellSpacing]="0">
+                  <tr>
+                    <td
+                      style="
+                        vertical-align: middle;
+                        font-size: 32px;
+                        font-weight: bolder;
+                        color: white;
+                      "
+                    >
+                      {{ totalSemanal | currency }}
+                    </td>
+                    <td
+                      style="
+                        width: 100%;
+                        text-align: right;
+                        vertical-align: bottom;
+                        color: white;
+                      "
+                    >
+                      <span class="material-icons" style="font-size: 48px">
+                        point_of_sale
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+              </mat-card-title>
+              <mat-card-subtitle style="color: white"
+                >Recaudación semanal</mat-card-subtitle
+              >
+            </mat-card>
+          </td>
+          <td></td>
+          <td style="width: 33%">
+            <mat-card
+              class="mat-elevation-z4 fondo-card-6"
+              (click)="link('ventas')"
+              style="cursor: pointer"
+            >
+              <mat-card-title>
+                <table width="100%" [cellPadding]="0" [cellSpacing]="0">
+                  <tr>
+                    <td
+                      style="
+                        vertical-align: middle;
+                        font-size: 32px;
+                        font-weight: bolder;
+                        color: white;
+                      "
+                    >
+                      {{ mercadoPagoSemanal | currency }}
+                    </td>
+                    <td
+                      style="
+                        width: 100%;
+                        text-align: right;
+                        vertical-align: bottom;
+                        color: white;
+                      "
+                    >
+                      <span class="material-icons" style="font-size: 48px">
+                        credit_card
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+              </mat-card-title>
+              <mat-card-subtitle style="color: white"
+                >Mercado Pago semanal</mat-card-subtitle
+              >
+            </mat-card>
+          </td>
+        </tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div> -->
+
+<p-confirmDialog [breakpoints]="{ '450px': '75vw' }" [style]="{ width: '450px' }"></p-confirmDialog>
+<p-toast></p-toast>

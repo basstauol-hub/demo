@@ -1,0 +1,95 @@
+<div class="selector-container" #dropdownContainer>
+  <label class="form-label">Propietario *</label>
+
+  <!-- Propietario Seleccionado -->
+  <div *ngIf="selectedPropietario" class="selected-propietario">
+    <div class="propietario-avatar">
+      {{ selectedPropietario.nombre.charAt(0) }}{{ selectedPropietario.apellido.charAt(0) }}
+    </div>
+    <div class="propietario-info">
+      <div class="propietario-name">
+        {{ selectedPropietario.nombre }} {{ selectedPropietario.apellido }}
+      </div>
+      <div class="propietario-dni text-muted">DNI: {{ selectedPropietario.dni }}</div>
+    </div>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Limpiar selección"
+      (click)="clearSelection()">
+    </button>
+  </div>
+
+  <!-- Botón de Búsqueda -->
+  <button
+    *ngIf="!selectedPropietario"
+    type="button"
+    class="btn btn-outline-secondary w-100 text-start search-button"
+    (click)="toggleDropdown()">
+    <i class="bi bi-search me-2"></i>
+    Buscar propietario...
+  </button>
+
+  <!-- Dropdown de Búsqueda -->
+  <div *ngIf="isOpen" class="dropdown-menu show w-100 dropdown-custom">
+    <!-- Header de búsqueda -->
+    <div class="search-header p-3 border-bottom">
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="bi bi-search"></i>
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="searchTerm"
+          (input)="filterPropietarios()"
+          placeholder="Buscar por nombre, DNI o email..."
+          #searchInput>
+      </div>
+    </div>
+
+    <!-- Contenido del dropdown -->
+    <div class="dropdown-content">
+      <!-- Loading -->
+      <div *ngIf="loading" class="loading-container text-center py-4">
+        <div class="spinner-border text-primary mb-2" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <div class="text-muted">Cargando propietarios...</div>
+      </div>
+
+      <!-- No results -->
+      <div *ngIf="!loading && filteredPropietarios.length === 0" class="no-results text-center py-4 text-muted">
+        {{ searchTerm ? 'No se encontraron propietarios' : 'No hay propietarios disponibles' }}
+      </div>
+
+      <!-- Lista de propietarios -->
+      <div *ngIf="!loading && filteredPropietarios.length > 0" class="propietarios-list">
+        <button
+          *ngFor="let propietario of filteredPropietarios"
+          type="button"
+          class="dropdown-item propietario-item"
+          (click)="selectPropietario(propietario)">
+          <div class="d-flex align-items-center">
+            <div class="item-avatar me-3">
+              {{ propietario.nombre.charAt(0) }}{{ propietario.apellido.charAt(0) }}
+            </div>
+            <div class="item-info flex-grow-1">
+              <div class="item-name fw-medium">
+                {{ propietario.nombre }} {{ propietario.apellido }}
+              </div>
+              <div class="item-details text-muted small">
+                DNI: {{ propietario.dni }} • {{ propietario.email }}
+              </div>
+            </div>
+            <i *ngIf="selectedPropietario?.id === propietario.id"
+               class="bi bi-check-lg text-primary"></i>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error message -->
+  <div *ngIf="error" class="invalid-feedback d-block">{{ error }}</div>
+</div>

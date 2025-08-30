@@ -1,0 +1,98 @@
+<div class="container-fluid">
+   Header 
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">
+      <i class="fas fa-users me-2"></i>
+      Gestión de Inquilinos
+    </h2>
+    
+    <button
+      *ngIf="viewMode === 'list'"
+      type="button"
+      class="btn btn-primary"
+      (click)="handleNew()"
+    >
+      <i class="fas fa-plus me-1"></i>
+      Nuevo Inquilino
+    </button>
+  </div>
+
+   List View 
+  <div *ngIf="viewMode === 'list'">
+     Search Bar 
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <div class="input-group">
+          <span class="input-group-text">
+            <i class="fas fa-search"></i>
+          </span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Buscar por nombre, apellido, DNI, CUIT/CUIL, teléfono, email o dirección..."
+            [(ngModel)]="searchTerm"
+            (input)="filterInquilinos()"
+          />
+        </div>
+      </div>
+      <div class="col-md-6 text-end">
+        <span class="text-muted">
+          {{ filteredInquilinos.length }} de {{ inquilinos.length }} inquilinos
+        </span>
+      </div>
+    </div>
+
+     Loading 
+    <div *ngIf="loading" class="text-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p class="mt-2 text-muted">Cargando inquilinos...</p>
+    </div>
+
+     Table 
+    <app-inquilinos-table
+      *ngIf="!loading"
+      [inquilinos]="filteredInquilinos"
+      (onEdit)="handleEdit($event)"
+      (onView)="handleView($event)"
+      (onRefresh)="loadInquilinos()"
+    ></app-inquilinos-table>
+  </div>
+
+   Form View 
+  <app-inquilino-form
+    *ngIf="viewMode === 'form'"
+    [inquilino]="selectedInquilino"
+    (onSuccess)="handleFormSuccess()"
+    (onCancel)="handleCancel()"
+  ></app-inquilino-form>
+
+   Detail View 
+  <app-inquilino-detail
+    *ngIf="viewMode === 'detail'"
+    [inquilino]="selectedInquilino!"
+    (onEdit)="handleEditFromDetail()"
+    (onBack)="handleBackToList()"
+  ></app-inquilino-detail>
+
+   Toast Container 
+  <ngb-toast
+    *ngIf="showToast"
+    [class]="'toast-' + toastType"
+    [autohide]="true"
+    [delay]="5000"
+    (hidden)="showToast = false"
+    class="position-fixed top-0 end-0 m-3"
+    style="z-index: 1200;"
+  >
+    <div class="toast-header">
+      <i class="fas" [class.fa-check-circle]="toastType === 'success'" [class.fa-exclamation-circle]="toastType === 'error'" [class.text-success]="toastType === 'success'" [class.text-danger]="toastType === 'error'"></i>
+      <strong class="me-auto ms-2">{{ toastType === 'success' ? 'Éxito' : 'Error' }}</strong>
+      <button type="button" class="btn-close" (click)="showToast = false"></button>
+    </div>
+    <div class="toast-body">
+      {{ toastMessage }}
+    </div>
+  </ngb-toast>
+</div>

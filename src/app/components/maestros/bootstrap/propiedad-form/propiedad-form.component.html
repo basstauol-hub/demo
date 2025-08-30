@@ -1,0 +1,187 @@
+<div class="form-container">
+  <div class="form-card">
+    <!-- Header -->
+    <div class="form-header">
+      <div class="d-flex align-items-center gap-3">
+        <div class="form-icon">
+          <i class="bi bi-house-fill text-white"></i>
+        </div>
+        <div>
+          <h2 class="form-title mb-1">{{ isEditMode ? 'Editar Propiedad' : 'Nueva Propiedad' }}</h2>
+          <p class="form-subtitle mb-0">{{ isEditMode ? 'Modifica los datos de la propiedad' : 'Completa los datos de la nueva propiedad' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="propiedadForm" (ngSubmit)="onSubmit()" class="form-content">
+
+      <!-- Propietario Section -->
+      <div class="form-section">
+        <h3 class="section-title">Propietario</h3>
+
+        <div class="form-group">
+          <app-propietario-selector
+            [selectedPropietario]="selectedPropietario"
+            (propietarioSelected)="onPropietarioSelected($event)"
+            (propietarioCleared)="onPropietarioCleared()">
+          </app-propietario-selector>
+        </div>
+      </div>
+
+      <!-- Información de Ubicación Section -->
+      <div class="form-section">
+        <h3 class="section-title">Información de Ubicación</h3>
+
+        <div class="form-group">
+          <label class="form-label required" for="direccion">Dirección</label>
+          <input
+            type="text"
+            id="direccion"
+            class="form-control"
+            formControlName="direccion"
+            placeholder="Ingresa la dirección completa"
+            [class.is-invalid]="isFieldInvalid('direccion')">
+          <div *ngIf="isFieldInvalid('direccion')" class="invalid-feedback">
+            La dirección es requerida
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-label required" for="ciudad">Ciudad</label>
+              <input
+                type="text"
+                id="ciudad"
+                class="form-control"
+                formControlName="ciudad"
+                placeholder="Ciudad"
+                [class.is-invalid]="isFieldInvalid('ciudad')">
+              <div *ngIf="isFieldInvalid('ciudad')" class="invalid-feedback">
+                La ciudad es requerida
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-label required" for="provincia">Provincia</label>
+              <input
+                type="text"
+                id="provincia"
+                class="form-control"
+                formControlName="provincia"
+                placeholder="Provincia"
+                [class.is-invalid]="isFieldInvalid('provincia')">
+              <div *ngIf="isFieldInvalid('provincia')" class="invalid-feedback">
+                La provincia es requerida
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-label required" for="codigoPostal">Código Postal</label>
+              <input
+                type="text"
+                id="codigoPostal"
+                class="form-control"
+                formControlName="codigoPostal"
+                placeholder="CP"
+                [class.is-invalid]="isFieldInvalid('codigoPostal')">
+              <div *ngIf="isFieldInvalid('codigoPostal')" class="invalid-feedback">
+                El código postal es requerido
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Características Section -->
+      <div class="form-section">
+        <h3 class="section-title">Características</h3>
+
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-label required" for="tipoPropiedad">Tipo de Propiedad</label>
+              <select
+                id="tipoPropiedad"
+                class="form-select"
+                formControlName="idTipoPropiedad"
+                [class.is-invalid]="isFieldInvalid('idTipoPropiedad')">
+                <option value="">Seleccionar tipo</option>
+                <option value="1">Departamento</option>
+                <option value="2">Casa</option>
+                <option value="3">Local Comercial</option>
+                <option value="4">Oficina</option>
+                <option value="5">Terreno</option>
+              </select>
+              <div *ngIf="isFieldInvalid('idTipoPropiedad')" class="invalid-feedback">
+                El tipo de propiedad es requerido
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-label required" for="superficie">Superficie (m²)</label>
+              <input
+                type="number"
+                id="superficie"
+                class="form-control"
+                formControlName="superficie"
+                placeholder="0"
+                min="1"
+                [class.is-invalid]="isFieldInvalid('superficie')">
+              <div *ngIf="isFieldInvalid('superficie')" class="invalid-feedback">
+                La superficie es requerida y debe ser mayor a 0
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="form-label required" for="cantidadAmbientes">Cantidad de Ambientes</label>
+              <input
+                type="number"
+                id="cantidadAmbientes"
+                class="form-control"
+                formControlName="cantidadAmbientes"
+                placeholder="0"
+                min="1"
+                [class.is-invalid]="isFieldInvalid('cantidadAmbientes')">
+              <div *ngIf="isFieldInvalid('cantidadAmbientes')" class="invalid-feedback">
+                La cantidad de ambientes es requerida
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="btn btn-primary gradient-button"
+          [disabled]="propiedadForm.invalid || saving">
+          <div *ngIf="saving" class="spinner-border spinner-border-sm me-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <i *ngIf="!saving" class="bi bi-check-lg me-2"></i>
+          {{ saving ? 'Guardando...' : (isEditMode ? 'Actualizar' : 'Crear Propiedad') }}
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="onCancelClick()"
+          [disabled]="saving">
+          <i class="bi bi-x-lg me-2"></i>
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
