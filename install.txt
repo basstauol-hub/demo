@@ -1,0 +1,55 @@
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/primeng/resources/themes/mdc-light-indigo/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css",
+              "src/styles.css",
+              "./node_modules/quill/dist/quill.core.css",
+              "./node_modules/quill/dist/quill.snow.css",
+
+
+
+firebase login:add frayleon.salud.site@gmail.com
+firebase login:add feagostino@hotmail.com
+firebase login:use frayleon.salud.site@gmail.com
+firebase login:list
+firebase projects:list
+firebase deploy --only hosting # deploy as alice@example.com
+firebase logout
+
+
+ID =>	NOMBRE_PLURAL:Asignaciones						        /*Nombre de objetos*/
+		  NOMBRE_SINGULAR:Asignacion						        /*Nombre de objetos*/
+		  CAMPO_ID										                  /*Campo que figura como PK*/
+
+CAMPO =>	TEXT | MULTITEXT | COMBO | DATE | NUMBER	/*Tipo de control HTML*/
+			LISTA										                      /*Si aparece en la tabla*/
+			CAMPO_LEYENDA								                  /*Valor con el que llena el cambo desde una FK*/
+
+
+npm i firebase
+
+npm i @angular/fire
+
+npm i @firebase/auth
+
+ver si con esto se puede centrar
+.clase{
+  display: flex;
+  justify-content:center;
+  align-item: center;
+  width: 100vw;
+  hieght: 100vh;
+}
+
+
+"node_modules/primeng/resources/themes/mdc-light-indigo/theme.css",
+
+
+"rxjs": "~6.5.4",
+"firebase": "^9.4.1",
+"@angular/fire": "^7.2.0",
+
+
+proxy.conf.json => "target": "https://localhost:44382",
+proxy.conf.json => "target": "https://frayleonsalud.somee.com/",
+

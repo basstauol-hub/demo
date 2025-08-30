@@ -1,0 +1,47 @@
+{
+  "hosting": {
+    "public": "./dist/Cepia",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "headers": [ {
+    "source": "*",
+    "headers": [ {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    } ]
+  }, {
+    "source": "**/*.@(jpg|jpeg|gif|png)",
+    "headers": [ {
+      "key": "Cache-Control",
+      "value": "max-age=7200"
+    } ]
+  }, {
+    "source": "404.html",
+    "headers": [ {
+      "key": "Cache-Control",
+      "value": "max-age=300"
+    } ]
+  },{
+    "headers": [
+      { "source":"/service-worker.js", "headers": [{"key": "Cache-Control", "value": "no-cache"}] }
+    ]
+  } ],
+
+
+
+  "trailingSlash": false,
+
+
+  "appAssociation": "AUTO"
+
+}
