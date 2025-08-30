@@ -1,0 +1,235 @@
+.table-container {
+  background-color: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.empty-state {
+  padding: 3rem 1.5rem;
+}
+
+.table-header {
+  background-color: #f8fafc;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table-th {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+  text-transform: none;
+  letter-spacing: 0;
+  padding: 0.75rem 1rem;
+  border: none;
+  vertical-align: middle;
+}
+
+.table-row {
+  border-bottom: 1px solid #f3f4f6;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: #f9fafb;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.table tbody td {
+  padding: 0.75rem 1rem;
+  vertical-align: middle;
+  border: none;
+}
+
+.garante-avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.garante-name {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  color: #111827;
+}
+
+.garante-id {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.document-info {
+  min-width: 120px;
+}
+
+.document-icon {
+  color: #6b7280;
+  font-size: 0.75rem;
+}
+
+.dni-number {
+  font-size: 0.875rem;
+  color: #111827;
+  font-weight: 500;
+}
+
+.cuit-badge {
+  background-color: #f3f4f6;
+  color: #374151;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+}
+
+.contact-info {
+  min-width: 160px;
+  max-width: 200px;
+}
+
+.contact-icon {
+  color: #6b7280;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.contact-email {
+  font-size: 0.75rem;
+  color: #111827;
+  max-width: 150px;
+}
+
+.contact-phone {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.address-info {
+  min-width: 140px;
+  max-width: 180px;
+}
+
+.location-icon {
+  color: #6b7280;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.address-text {
+  font-size: 0.75rem;
+  color: #111827;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.btn-action {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 0.375rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+  }
+}
+
+.btn-view {
+  color: #3b82f6;
+  background-color: transparent;
+  border-color: #d1d5db;
+
+  &:hover {
+    background-color: #eff6ff;
+    border-color: #3b82f6;
+    color: #2563eb;
+  }
+}
+
+.btn-edit {
+  color: #6b7280;
+  background-color: transparent;
+  border-color: #d1d5db;
+
+  &:hover {
+    background-color: #f3f4f6;
+    border-color: #6b7280;
+    color: #374151;
+  }
+}
+
+.btn-delete {
+  color: #ef4444;
+  background-color: transparent;
+  border-color: #d1d5db;
+
+  &:hover {
+    background-color: #fef2f2;
+    border-color: #ef4444;
+    color: #dc2626;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+
+  .garante-name {
+    max-width: 120px;
+  }
+
+  .contact-info {
+    min-width: 140px;
+    max-width: 160px;
+  }
+
+  .address-info {
+    min-width: 120px;
+    max-width: 140px;
+  }
+
+  .table-th,
+  .table tbody td {
+    padding: 0.5rem;
+  }
+
+  .garante-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 0.75rem;
+  }
+}

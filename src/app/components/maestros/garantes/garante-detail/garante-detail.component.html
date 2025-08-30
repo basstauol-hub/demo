@@ -1,0 +1,165 @@
+<div class="detail-container">
+  <!-- Header -->
+  <div class="d-flex align-items-center gap-3 mb-4">
+    <button
+      type="button"
+      class="btn btn-outline-secondary d-flex align-items-center gap-2"
+      (click)="onBack.emit()">
+      <i class="bi bi-arrow-left"></i>
+      Volver
+    </button>
+    <h1 class="fs-2 fw-bold mb-0">Detalle del Garante</h1>
+  </div>
+
+  <!-- Garante Detail Card -->
+  <div class="card shadow-sm">
+    <!-- Card Header -->
+    <div class="card-header bg-white border-bottom py-3">
+      <div class="d-flex justify-content-between align-items-start">
+        <div class="d-flex align-items-center gap-3">
+          <div class="garante-icon">
+            <i class="bi bi-shield-check text-white"></i>
+          </div>
+          <div>
+            <h3 class="mb-1 fw-bold">{{ garante.nombre }} {{ garante.apellido }}</h3>
+            <p class="text-muted mb-0">
+              DNI: {{ garante.dni }}
+              <span *ngIf="garante.cuit_cuil"> • CUIT/CUIL: {{ garante.cuit_cuil }}</span>
+            </p>
+          </div>
+        </div>
+        <button
+          type="button"
+          class="btn btn-primary gradient-button d-flex align-items-center gap-2"
+          (click)="onEdit.emit()">
+          <i class="bi bi-pencil"></i>
+          Editar
+        </button>
+      </div>
+    </div>
+
+    <!-- Card Content -->
+    <div class="card-body p-4">
+      <div class="row g-4">
+        <!-- Información Personal -->
+        <div class="col-lg-6">
+          <div class="info-section">
+            <div class="section-header mb-3">
+              <i class="bi bi-person-vcard-fill text-primary me-2"></i>
+              <h4 class="fw-semibold mb-0">Información Personal</h4>
+            </div>
+            <div class="section-content ms-4">
+              <div class="info-row">
+                <span class="info-label">Nombre:</span>
+                <span class="info-value">{{ garante.nombre }}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Apellido:</span>
+                <span class="info-value">{{ garante.apellido }}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">DNI:</span>
+                <span class="badge bg-light text-dark">{{ garante.dni }}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">CUIT/CUIL:</span>
+                <span class="badge bg-info bg-opacity-10 text-info">{{ garante.cuit_cuil }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Información de Contacto -->
+        <div class="col-lg-6">
+          <div class="info-section">
+            <div class="section-header mb-3">
+              <i class="bi bi-telephone-fill text-primary me-2"></i>
+              <h4 class="fw-semibold mb-0">Información de Contacto</h4>
+            </div>
+            <div class="section-content ms-4">
+              <div class="info-row">
+                <span class="info-label">Email:</span>
+                <div class="d-flex align-items-center gap-1">
+                  <i class="bi bi-envelope text-muted small"></i>
+                  <a href="mailto:{{ garante.email }}" class="info-value text-decoration-none">
+                    {{ garante.email }}
+                  </a>
+                </div>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Teléfono:</span>
+                <div class="d-flex align-items-center gap-1">
+                  <i class="bi bi-telephone text-muted small"></i>
+                  <a href="tel:{{ garante.telefono }}" class="info-value text-decoration-none">
+                    {{ garante.telefono }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dirección -->
+      <div class="address-section mt-4 pt-4 border-top">
+        <div class="section-header mb-3">
+          <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+          <h4 class="fw-semibold mb-0">Dirección</h4>
+        </div>
+        <div class="address-card ms-4">
+          <div class="address-content">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-house-fill text-primary me-2 mt-1"></i>
+              <span class="address-text">{{ garante.direccion }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Section -->
+      <div class="stats-section mt-4 pt-4 border-top">
+        <div class="section-header mb-3">
+          <i class="bi bi-bar-chart-fill text-primary me-2"></i>
+          <h4 class="fw-semibold mb-0">Estadísticas</h4>
+        </div>
+        <div class="stats-content ms-4">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="bi bi-file-earmark-text-fill"></i>
+                </div>
+                <div class="stat-info">
+                  <div class="stat-number">0</div>
+                  <div class="stat-label">Contratos Avalados</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="bi bi-calendar-check-fill"></i>
+                </div>
+                <div class="stat-info">
+                  <div class="stat-number">0</div>
+                  <div class="stat-label">Garantías Activas</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="bi bi-cash-coin"></i>
+                </div>
+                <div class="stat-info">
+                  <div class="stat-number">$0</div>
+                  <div class="stat-label">Monto Garantizado</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

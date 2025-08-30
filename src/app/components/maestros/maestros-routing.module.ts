@@ -23,6 +23,7 @@ import { ServiciosPracticajeComponent } from './serviciospracticaje/serviciospra
 import { PropiedadesPageComponent } from '../maestros/bootstrap/propiedades-page/propiedades-page.component';
 import { PropietariosPageComponent } from './propietarios/propietarios-page/propietarios_page.component';
 import { InquilinosPageComponent } from './inquilinos/inquilinos-page/inquilinos-page.component';
+import { GarantesPageComponent } from './garantes/garantes-page/garantes-page.component';
 
 const routes: Routes = [
   {
@@ -78,6 +79,11 @@ const routes: Routes = [
       {
         path: 'inquilinos',
         component: InquilinosPageComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'garantes',
+        component: GarantesPageComponent,
         canActivate: [AuthGuard],
       },
     ],

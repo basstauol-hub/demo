@@ -49,6 +49,7 @@ import { ConfirmDialogComponent } from './bootstrap/confirm-dialog/confirm-dialo
 import { PropietariosPageComponent } from './propietarios/propietarios-page/propietarios_page.component';
 import { PropietariosTableComponent } from './propietarios/propietarios-table/propietarios_table.component';
 import { InquilinosPageComponent } from './inquilinos/inquilinos-page/inquilinos-page.component';
+import { GarantesPageComponent } from './garantes/garantes-page/garantes-page.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { InquilinosPageComponent } from './inquilinos/inquilinos-page/inquilinos
     PropietarioSelectorComponent,
     PropietariosPageComponent,
     PropietariosTableComponent,
+    GarantesPageComponent,
 
   ],
   providers: [NodeService],
